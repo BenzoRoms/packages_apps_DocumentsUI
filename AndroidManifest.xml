@@ -51,8 +51,8 @@
 
         <activity
             android:name=".files.LauncherActivity"
-            android:label="@string/launcher_label"
-            android:icon="@drawable/launcher_icon"
+            android:label="@string/app_label"
+            android:icon="@mipmap/ic_app_icon"
             android:theme="@android:style/Theme.NoDisplay">
         </activity>
 
@@ -60,8 +60,8 @@
         <activity-alias
             android:name=".LauncherActivity"
             android:targetActivity=".files.LauncherActivity"
-            android:label="@string/launcher_label"
-            android:icon="@drawable/launcher_icon" >
+            android:label="@string/app_label"
+            android:icon="@mipmap/ic_app_icon" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

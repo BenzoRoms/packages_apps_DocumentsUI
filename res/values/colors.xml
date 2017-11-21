@@ -47,6 +47,7 @@
     <color name="root_icon_color">#ff5a5a5a</color>
     <item name="root_icon_disabled_alpha" format="float" type="dimen">@*android:dimen/disabled_alpha_material_light</item>
     <color name="doc_icon_color">#ff5a5a5a</color>
+    <color name="icon_background">#ff356c84</color>
 
     <!-- TODO: Would be nice to move this to a color-set, but not sure how to support animation -->
     <color name="item_doc_title">#ff333333</color>

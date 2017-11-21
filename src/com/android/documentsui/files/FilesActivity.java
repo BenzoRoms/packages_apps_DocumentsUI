@@ -21,7 +21,10 @@ import static com.android.documentsui.OperationDialogFragment.DIALOG_TYPE_UNKNOW
 import android.app.ActivityManager.TaskDescription;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.AdaptiveIconDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -181,12 +184,18 @@ public class FilesActivity extends BaseActivity implements ActionHandler.Addons 
         int iconRes = intent.getIntExtra(LauncherActivity.TASK_ICON_RES, -1);
         assert(iconRes > -1);
 
-        BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(
-                iconRes,
-                null  // we don't care about theme, since the supplier should have handled that.
-                );
+        AdaptiveIconDrawable dr = (AdaptiveIconDrawable) getResources().getDrawable(iconRes).mutate();
 
-        setTaskDescription(new TaskDescription(label, drawable.getBitmap()));
+        setTaskDescription(new TaskDescription(label, getBitmapFromAdaptive(dr)));
+    }
+
+    private Bitmap getBitmapFromAdaptive(Drawable drawable) {
+        final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+		drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
     private void presentFileErrors(Bundle icicle, final Intent intent) {
